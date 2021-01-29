@@ -6,10 +6,13 @@
   "browser_action": {
     "default_popup": "index.html"
   },
-   "content_scripts": [
-   {
-     "matches": ["https://coinsquare.com/trade/*"],
-     "js": ["index.js"]
-   }
- ]
+  "content_scripts": [
+    {
+      "matches": ["https://coinsquare.com/trade/*"],
+      "js": ["index.js"]
+    }
+  ],
+  "permissions": [
+    "activeTab"
+  ]
 }
