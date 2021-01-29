@@ -6,6 +6,8 @@
   
   if (!ordersBlock) {
     console.error("Order block not found");
+    console.log(document.querySelectorAll("*"));
+    return;
   }
   
   observer.observe(
