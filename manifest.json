@@ -1,0 +1,6 @@
+{
+  "name": "Coinsquare notifier",
+  "description" : "Adds sound notifications for coinsquare web app",
+  "version": "1.0",
+  "manifest_version": 2
+}
