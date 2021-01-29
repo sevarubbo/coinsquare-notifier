@@ -9,7 +9,8 @@
   "content_scripts": [
     {
       "matches": ["https://coinsquare.com/trade/*"],
-      "js": ["index.js"]
+      "js": ["index.js"],
+      "run_at": "document_end"
     }
   ],
   "permissions": [
