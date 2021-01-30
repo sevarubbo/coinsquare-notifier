@@ -15,7 +15,7 @@
 
     observer.observe(
       ordersBlock,
-      { attributes: false, childList: true, subtree: true }
+      { attributes: true, childList: true, subtree: true }
     )
   });
 })()
