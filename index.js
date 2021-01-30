@@ -1,7 +1,9 @@
 (() => {
   const audio = new Audio("./sound.wav")
-  const observer = new MutationObserver(() => {
-    alert("Something's changed");
+  const observer = new MutationObserver((m) => {
+    chrome.notifications.create(id, {message: "YOooo"});
+    
+    console.log("Something's changed", m);
     
     audio.play();
   });
