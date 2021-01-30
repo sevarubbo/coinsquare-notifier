@@ -4,18 +4,18 @@
     chrome.runtime.sendMessage("orderchange");
   });
   
-  setTimeout(() => {
-    window.addEventListener('DOMContentLoaded', () => {
-      const ordersBlock = document.querySelectorAll(".tabbedContainer.FlexBox-eeYpfQ.hgRnHk")[1];
+  window.addEventListener('DOMContentLoaded', () => {
+    const ordersBlock = document.querySelectorAll(".tabbedContainer.FlexBox-eeYpfQ.hgRnHk")[1];
 
-      if (!ordersBlock) {
-        return;
-      }
-
+    if (!ordersBlock) {
+      return;
+    }
+    
+    setTimeout(() => {
       observer.observe(
         ordersBlock,
         { attributes: true, childList: true, subtree: true }
-      )
-    });
-  }, 1000); // Wait just a little bit
+      );
+    }, 1000); // Wait just a little bit
+  });
 })()
