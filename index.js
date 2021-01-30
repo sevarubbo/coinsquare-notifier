@@ -1,6 +1,10 @@
 (() => {
   const audio = new Audio("./sound.wav")
-  const observer = new MutationObserver(() => audio.play());
+  const observer = new MutationObserver(() => {
+    alert("Something's changed");
+    
+    audio.play();
+  });
   
   
   window.addEventListener('DOMContentLoaded', () => {
