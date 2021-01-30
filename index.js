@@ -1,7 +1,15 @@
 (() => {
+  let orders = null;
+  
   const observer = new MutationObserver((m) => {
     console.log("mutation", m);
-    chrome.runtime.sendMessage("orderchange");
+    
+    let nextOrders = document.querySelectorAll("[class^=OrderRow__OrderRowContainer]").length;
+    
+    if (orders !== nextOrders) {
+      chrome.runtime.sendMessage("orderchange");
+      orders = nextOrders;
+    }
   });
   
   window.addEventListener('DOMContentLoaded', () => {
@@ -16,6 +24,6 @@
         ordersBlock,
         { attributes: true, childList: true, subtree: true }
       );
-    }, 1000); // Wait just a little bit
+    }, 2000); // Wait a couple sec
   });
 })()
