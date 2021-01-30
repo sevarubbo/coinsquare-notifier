@@ -1,4 +1,4 @@
-const audio = new Audio("./sound.wav")
+const audio = new Audio("./sound1.wav")
 
 chrome.runtime.onMessage.addListener((message, callback) => {
   if (message == "orderchange"){
