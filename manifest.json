@@ -18,5 +18,9 @@
   ],
   "web_accessible_resources": [
     "./sound.wav"
-  ]
+  ],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  }
 }
