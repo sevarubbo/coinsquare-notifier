@@ -1,5 +1,6 @@
 (() => {
   const observer = new MutationObserver((m) => {
+    console.log("mutation", m);
     chrome.runtime.sendMessage("orderchange");
   });
   
