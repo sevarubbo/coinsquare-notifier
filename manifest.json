@@ -17,7 +17,8 @@
     "activeTab", "notifications"
   ],
   "web_accessible_resources": [
-    "./sound.wav"
+    "./sound.wav",
+    "./sound1.wav"
   ],
   "background": {
     "scripts": ["background.js"],
