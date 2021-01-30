@@ -25,11 +25,9 @@
       return;
     }
     
-    setTimeout(() => {
-      observer.observe(
-        ordersBlock,
-        { attributes: true, childList: true, subtree: true }
-      );
-    }, 2000); // Wait a couple sec
+    observer.observe(
+      ordersBlock,
+      { attributes: true, childList: true, subtree: true },
+    );
   });
 })()
