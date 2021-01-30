@@ -4,18 +4,18 @@
     chrome.runtime.sendMessage("orderchange");
   });
   
-  
-  window.addEventListener('DOMContentLoaded', () => {
-    const ordersBlock = document.querySelectorAll(".tabbedContainer.FlexBox-eeYpfQ.hgRnHk")[1];
-  
-    if (!ordersBlock) {
-      console.error("Order block not found");
-      return;
-    }
+  setTimeout(() => {
+    window.addEventListener('DOMContentLoaded', () => {
+      const ordersBlock = document.querySelectorAll(".tabbedContainer.FlexBox-eeYpfQ.hgRnHk")[1];
 
-    observer.observe(
-      ordersBlock,
-      { attributes: true, childList: true, subtree: true }
-    )
-  });
+      if (!ordersBlock) {
+        return;
+      }
+
+      observer.observe(
+        ordersBlock,
+        { attributes: true, childList: true, subtree: true }
+      )
+    });
+  }, 1000); // Wait just a little bit
 })()
