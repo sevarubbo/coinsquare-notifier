@@ -17,6 +17,6 @@
     "activeTab"
   ],
   "web_accessible_resources": [
-    "sound.wav"
+    "./sound.wav"
   ]
 }
