@@ -6,10 +6,16 @@
     
     let nextOrders = document.querySelectorAll("[class^=OrderRow__OrderRowContainer]").length;
     
-    if (orders !== nextOrders) {
-      chrome.runtime.sendMessage("orderchange");
-      orders = nextOrders;
+    if (orders !== null && orders !== nextOrders) {
+      
+      
+      chrome.runtime.sendMessage({
+        type: "orderchange",
+        message: nextOrders > orders ? "neworder" : "orderfulfilled",
+      });
     }
+    
+    orders = nextOrders;
   });
   
   window.addEventListener('DOMContentLoaded', () => {
