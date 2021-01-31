@@ -44,9 +44,11 @@
   });
   
   window.addEventListener('DOMContentLoaded', () => {
-    observer.observe(
-      document.body,
-      { attributes: true, childList: true, subtree: true },
-    );
+    setTimeout(() => {
+      observer.observe(
+        document.body,
+        { attributes: false, childList: true, subtree: true },
+      );
+    }, 0);
   });
 })()
