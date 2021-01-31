@@ -1,4 +1,5 @@
-const audio = new Audio("./sound1.wav")
+const audio = new Audio("./sound1.wav");
+const audio3 = new Audio("./sound3.wav")
 
 chrome.runtime.onMessage.addListener((message, callback) => {
   const messageId = `message-${Date.now()}`;
@@ -36,6 +37,7 @@ chrome.runtime.onMessage.addListener((message, callback) => {
           iconUrl: "./icon.png",
           message: `Селл ордер сдвинулся на позицию: ${positions}`,
         });
+        audio3.play();
       }
     }
   }
