@@ -2,6 +2,7 @@ const audio = new Audio("./sound1.wav")
 
 chrome.runtime.onMessage.addListener((message, callback) => {
   const messageId = `message-${Date.now()}`;
+  const defaultTitle = "👐";
   
   if (message.type == "orderchange"){
     if (message.message === "neworder") {
@@ -27,12 +28,14 @@ chrome.runtime.onMessage.addListener((message, callback) => {
   
   if (message.type === "order_position_change") {
     if (message.data.orderType === "sell") {
-      chrome.notifications.create(messageId, {
-        type: "basic",
-        title: "Hey",
-        iconUrl: "./icon.png",
-        message: "Селл ордер сдвинулся",
-      });
+      if (message.data.position <= 5) {
+        chrome.notifications.create(messageId, {
+          type: "basic",
+          title: defaultTitle,
+          iconUrl: "./icon.png",
+          message: `Селл ордер сдвинулся на позицию: ${message.data.position}`,
+        });
+      }
     }
   }
 });
