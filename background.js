@@ -29,7 +29,7 @@ chrome.runtime.onMessage.addListener((message, callback) => {
   if (message.type === "order_position_change") {
     if (message.data.orderType === "sell") {
       const positions = message.data.positions.split(",");
-      if (positions.length && positions.some(p => p <= 5)) {
+      if (message.data.positions.length && positions.some(p => p <= 5)) {
         chrome.notifications.create(messageId, {
           type: "basic",
           title: defaultTitle,
