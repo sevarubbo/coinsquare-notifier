@@ -26,7 +26,7 @@ chrome.runtime.onMessage.addListener((message, callback) => {
   }
   
   if (message.type === "order_position_change") {
-    if (message.data.type === "sell") {
+    if (message.data.orderType === "sell") {
       chrome.notifications.create(messageId, {
         type: "basic",
         title: "Hey",
