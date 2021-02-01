@@ -43,7 +43,7 @@
       sellOrderPositions = nextSellOrderPositions;
       
       const userBuyOrders = buyOrders.filter(o => o.querySelector("#LeftArrow"));
-      const nextBuyOrderPositions = userBuyOrders.map(o => sellOrders.indexOf(o) + 1).toString();
+      const nextBuyOrderPositions = userBuyOrders.map(o => buyOrders.indexOf(o) + 1).toString();
       
       if (nextBuyOrderPositions !== buyOrderPositions) {
         chrome.runtime.sendMessage({
