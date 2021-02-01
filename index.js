@@ -49,6 +49,6 @@
         document.body,
         { attributes: false, childList: true, subtree: true },
       );
-    }, 0);
+    }, 1000);
   });
 })()
