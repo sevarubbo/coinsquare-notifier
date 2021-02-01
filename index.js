@@ -1,6 +1,7 @@
 (() => {
   let orders = null;
   let sellOrderPositions = null;
+  let buyOrderPositions = null;
   
   const observer = new MutationObserver((m) => {
     (() => {
@@ -39,7 +40,22 @@
         });
       }
       
-      sellOrderPositions = nextSellOrderPositions
+      sellOrderPositions = nextSellOrderPositions;
+      
+      const userBuyOrders = buyOrders.filter(o => o.querySelector("#LeftArrow"));
+      const nextBuyOrderPositions = userBuyOrders.map(o => sellOrders.indexOf(o) + 1).toString();
+      
+      if (nextBuyOrderPositions !== buyOrderPositions) {
+        chrome.runtime.sendMessage({
+          type: "order_position_change",
+          data: {
+            orderType: "buy",
+            positions: nextBuyOrderPositions,
+          },
+        });
+      }
+      
+      buyOrderPositions = nextBuyOrderPositions;
     })()
   });
   
