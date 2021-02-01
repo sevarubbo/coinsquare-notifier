@@ -40,5 +40,18 @@ chrome.runtime.onMessage.addListener((message, callback) => {
         audio3.play();
       }
     }
+    
+    if (message.data.orderType === "buy") {
+      const positions = message.data.positions.split(",");
+      if (message.data.positions.length && positions.some(p => p <= 5)) {
+        chrome.notifications.create(messageId, {
+          type: "basic",
+          title: defaultTitle,
+          iconUrl: "./icon.png",
+          message: `Бай ордер сдвинулся на позицию: ${positions}`,
+        });
+        audio3.play();
+      }
+    }
   }
 });
