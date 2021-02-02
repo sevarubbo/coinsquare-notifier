@@ -1,3 +1,5 @@
+const OBSERVE_DELAY = 2000;
+
 (() => {
   let orders = null;
   let sellOrderPositions = null;
@@ -65,6 +67,6 @@
         document.body,
         { attributes: false, childList: true, subtree: true },
       );
-    }, 1000);
+    }, OBSERVE_DELAY);
   });
 })()
