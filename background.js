@@ -39,11 +39,11 @@ chrome.runtime.onMessage.addListener((message, callback) => {
     lastOrderPosition = position;
     
     if (position === 1) {
-      orderSounds.orderTop();
+      playSounds.orderTop();
     } else if (didMoveUp) {
-      orderSounds.orderUp();
+      playSounds.orderUp();
     } else {
-      orderSounds.orderDown();
+      playSounds.orderDown();
     }
     
     if (message.data.orderType === "sell") {
