@@ -35,14 +35,15 @@ chrome.runtime.onMessage.addListener((message, callback) => {
   
   if (message.type === "order_position_change") {
     const position = message.data.positions.split(",")[0];
-    const didMoveUp = position < lastOrderPositions[message.data.orderType];
+    const orderType = message.data.orderType;
     
-    if (lastOrderPositions[message.data.orderType] === null) {
-      lastOrderPositions[message.data.orderType] = position;
+    if (lastOrderPositions[orderType] === null) {
+      lastOrderPositions[orderType] = position;
       return;
     }
     
-    lastOrderPositions[message.data.orderType] = position;
+    const didMoveUp = position < lastOrderPositions[orderType];
+    lastOrderPositions[orderType] = position;
     
     if (position == 1) {
       playSounds.orderTop();
