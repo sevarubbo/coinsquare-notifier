@@ -5,7 +5,7 @@ const playSounds = {
   orderTop: () => new Audio("./order-top.wav").play(),
 };
 
-let lastOrderPosition = null;
+let lastOrderPositions = {sell: null, buy: null};
 
 chrome.runtime.onMessage.addListener((message, callback) => {
   const messageId = `message-${Date.now()}`;
@@ -35,14 +35,14 @@ chrome.runtime.onMessage.addListener((message, callback) => {
   
   if (message.type === "order_position_change") {
     const position = message.data.positions.split(",")[0];
-    const didMoveUp = position < lastOrderPosition;
+    const didMoveUp = position < lastOrderPositions[message.data.orderType];
     
-    if (lastOrderPosition === null) {
-      lastOrderPosition = position;
+    if (lastOrderPositions[message.data.orderType] === null) {
+      lastOrderPositions[message.data.orderType] = position;
       return;
     }
     
-    lastOrderPosition = position;
+    lastOrderPositions[message.data.orderType] = position;
     
     if (position == 1) {
       playSounds.orderTop();
