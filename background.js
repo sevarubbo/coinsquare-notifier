@@ -45,6 +45,10 @@ chrome.runtime.onMessage.addListener((message, callback) => {
     const didMoveUp = position < lastOrderPositions[orderType];
     lastOrderPositions[orderType] = position;
     
+    if (position > 5) {
+      return;
+    }
+    
     if (position == 1) {
       playSounds.orderTop();
     } else if (didMoveUp) {
@@ -54,25 +58,21 @@ chrome.runtime.onMessage.addListener((message, callback) => {
     }
     
     if (message.data.orderType === "sell") {
-      if (position && position <= 5) {
-        chrome.notifications.create(messageId, {
-          type: "basic",
-          title: defaultTitle,
-          iconUrl: "./icon.png",
-          message: `Селл ордер ${didMoveUp ? "поднялся" : "опустился"} на позицию: ${position}`,
-        });
-      }
+      chrome.notifications.create(messageId, {
+        type: "basic",
+        title: defaultTitle,
+        iconUrl: "./icon.png",
+        message: `Селл ордер ${didMoveUp ? "поднялся" : "опустился"} на позицию: ${position}`,
+      });
     }
     
     if (message.data.orderType === "buy") {
-      if (position && position <= 5) {
-        chrome.notifications.create(messageId, {
-          type: "basic",
-          title: defaultTitle,
-          iconUrl: "./icon.png",
-          message: `Бай ордер ${didMoveUp ? "поднялся" : "опустился"} на позицию: ${position}`,
-        });
-      }
+      chrome.notifications.create(messageId, {
+        type: "basic",
+        title: defaultTitle,
+        iconUrl: "./icon.png",
+        message: `Бай ордер ${didMoveUp ? "поднялся" : "опустился"} на позицию: ${position}`,
+      });
     }
   }
 });
