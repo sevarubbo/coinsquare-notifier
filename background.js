@@ -38,7 +38,7 @@ chrome.runtime.onMessage.addListener((message, callback) => {
     const didMoveUp = position < lastOrderPosition;
     lastOrderPosition = position;
     
-    if (position === 1) {
+    if (position == 1) {
       playSounds.orderTop();
     } else if (didMoveUp) {
       playSounds.orderUp();
