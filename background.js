@@ -1,5 +1,7 @@
 const audio = new Audio("./sound1.wav");
-const audio3 = new Audio("./sound3.wav")
+const audio3 = new Audio("./sound3.wav");
+
+let [sellPosition, buyPosition] = [null, null];
 
 chrome.runtime.onMessage.addListener((message, callback) => {
   const messageId = `message-${Date.now()}`;
@@ -29,26 +31,34 @@ chrome.runtime.onMessage.addListener((message, callback) => {
   
   if (message.type === "order_position_change") {
     if (message.data.orderType === "sell") {
-      const positions = message.data.positions.split(",");
-      if (message.data.positions.length && positions.some(p => p <= 5)) {
+      const position = message.data.positions.split(",")[0];
+      
+      if (position && position <= 5) {
+        const didMoveUp = position < sellPosition;
+        sellPosition = position;
+        
         chrome.notifications.create(messageId, {
           type: "basic",
           title: defaultTitle,
           iconUrl: "./icon.png",
-          message: `Селл ордер сдвинулся на позицию: ${positions}`,
+          message: `Селл ордер ${didMoveUp ? "поднялся" : "опустился"} на позицию: ${position}`,
         });
         audio3.play();
       }
     }
     
     if (message.data.orderType === "buy") {
-      const positions = message.data.positions.split(",");
-      if (message.data.positions.length && positions.some(p => p <= 5)) {
+      const position = message.data.positions.split(",")[0];
+      
+      if (position && position <= 5) {
+        const didMoveUp = position < buyPosition;
+        buyPosition = position;
+        
         chrome.notifications.create(messageId, {
           type: "basic",
           title: defaultTitle,
           iconUrl: "./icon.png",
-          message: `Бай ордер сдвинулся на позицию: ${positions}`,
+          message: `Бай ордер ${didMoveUp ? "поднялся" : "опустился"} на позицию: ${position}`,
         });
         audio3.play();
       }
