@@ -1,5 +1,5 @@
 const playSounds = {
-  orderChange: () => new Audio("./sound1.wav"),
+  orderChange: () => new Audio("./sound1.wav").play(),
   orderUp: () => new Audio("./order-up.wav").play(),
   orderDown: () => new Audio("./order-down.wav").play(),
   orderTop: () => new Audio("./order-top.wav").play(),
@@ -36,6 +36,12 @@ chrome.runtime.onMessage.addListener((message, callback) => {
   if (message.type === "order_position_change") {
     const position = message.data.positions.split(",")[0];
     const didMoveUp = position < lastOrderPosition;
+    
+    if (lastOrderPosition === null) {
+      lastOrderPosition = position;
+      return;
+    }
+    
     lastOrderPosition = position;
     
     if (position == 1) {
