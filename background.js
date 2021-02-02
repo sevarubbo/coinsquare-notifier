@@ -1,7 +1,11 @@
-const audio = new Audio("./sound1.wav");
-const audio3 = new Audio("./sound3.wav");
+const playSounds = {
+  orderChange: () => new Audio("./sound1.wav"),
+  orderUp: () => new Audio("./order-up.wav").play(),
+  orderDown: () => new Audio("./order-down.wav").play(),
+  orderTop: () => new Audio("./order-top.wav").play(),
+};
 
-let [sellPosition, buyPosition] = [null, null];
+let lastOrderPosition = null;
 
 chrome.runtime.onMessage.addListener((message, callback) => {
   const messageId = `message-${Date.now()}`;
@@ -26,41 +30,41 @@ chrome.runtime.onMessage.addListener((message, callback) => {
       });
     }
     
-    audio.play();
+    playSounds.orderChange();
   }
   
   if (message.type === "order_position_change") {
+    const position = message.data.positions.split(",")[0];
+    const didMoveUp = position < lastOrderPosition;
+    lastOrderPosition = position;
+    
+    if (position === 1) {
+      orderSounds.orderTop();
+    } else if (didMoveUp) {
+      orderSounds.orderUp();
+    } else {
+      orderSounds.orderDown();
+    }
+    
     if (message.data.orderType === "sell") {
-      const position = message.data.positions.split(",")[0];
-      
       if (position && position <= 5) {
-        const didMoveUp = position < sellPosition;
-        sellPosition = position;
-        
         chrome.notifications.create(messageId, {
           type: "basic",
           title: defaultTitle,
           iconUrl: "./icon.png",
           message: `Селл ордер ${didMoveUp ? "поднялся" : "опустился"} на позицию: ${position}`,
         });
-        audio3.play();
       }
     }
     
     if (message.data.orderType === "buy") {
-      const position = message.data.positions.split(",")[0];
-      
       if (position && position <= 5) {
-        const didMoveUp = position < buyPosition;
-        buyPosition = position;
-        
         chrome.notifications.create(messageId, {
           type: "basic",
           title: defaultTitle,
           iconUrl: "./icon.png",
           message: `Бай ордер ${didMoveUp ? "поднялся" : "опустился"} на позицию: ${position}`,
         });
-        audio3.play();
       }
     }
   }
