@@ -1,9 +1,14 @@
-const playSounds = {
-  orderChange: () => new Audio("./sound1.wav").play(),
-  orderUp: () => new Audio("./order-up.wav").play(),
-  orderDown: () => new Audio("./order-down.wav").play(),
-  orderTop: () => new Audio("./order-top.wav").play(),
-};
+const audio = new Audio();
+audio.volume = 0.5;
+
+const play = src => {audio.src = "./sound1.wav"; audio.play();}
+
+const playSounds = () => {
+  orderChange: () => play("./sound1.wav"),
+  orderUp: () => play("./order-up.wav"),
+  orderDown: () => play("./order-down.wav"),
+  orderTop: () => play("./order-top.wav"),
+};  
 
 let lastOrderPositions = {sell: null, buy: null};
 
@@ -74,5 +79,9 @@ chrome.runtime.onMessage.addListener((message, callback) => {
         message: `Бай ордер ${didMoveUp ? "поднялся" : "опустился"} на позицию: ${position}`,
       });
     }
+  }
+  
+  if (message.type == "volume-change") {
+    audio.volume = message.data.volume;
   }
 });
