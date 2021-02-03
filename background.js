@@ -3,7 +3,7 @@ audio.volume = 0.5;
 
 const play = src => {audio.src = "./sound1.wav"; audio.play();}
 
-const playSounds = () => {
+const playSounds = {
   orderChange: () => play("./sound1.wav"),
   orderUp: () => play("./order-up.wav"),
   orderDown: () => play("./order-down.wav"),
