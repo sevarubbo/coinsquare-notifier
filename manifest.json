@@ -14,7 +14,7 @@
     }
   ],
   "permissions": [
-    "activeTab", "notifications"
+    "activeTab", "notifications", "storage"
   ],
   "web_accessible_resources": [
     "./sound.wav",
