@@ -12,7 +12,10 @@
     <input id="volume-input" type="range" min="0" max="1"  />
     <script>
       document.getElementById("volume-input").addEventListener("change", (e) => {
-        window.VOLUME = e.target.value;
+        chrome.runtime.sendMessage({
+          type: "volume-change",
+          data: {volume: e.target.value},
+        });
       });
     </script>
   </body>
