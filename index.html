@@ -4,19 +4,16 @@
     
     <style>
       #volume-input {
-        width: 100%;
         margin: 0;
+      }
+      
+      .volume-input-container {
+        width: 100%;
       }
     </style>
     
-    <input id="volume-input" type="range" min="0" max="1"  />
-    <script>
-      document.getElementById("volume-input").addEventListener("change", (e) => {
-        chrome.runtime.sendMessage({
-          type: "volume-change",
-          data: {volume: e.target.value},
-        });
-      });
-    </script>
+    <div class="volume-input-container">
+      <input id="volume-input" type="range" min="0" max="1" />
+    </div>
   </body>
 </html>
