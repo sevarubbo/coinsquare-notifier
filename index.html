@@ -1,5 +1,19 @@
 <html>
   <body style="margin: 0; display: flex;">
     <img src="https://inductor.su/pics/techlit32_1.jpg" width="100" style="display: block;" />
+    
+    <style>
+      #volume-input {
+        width: 100%;
+        margin: 0;
+      }
+    </style>
+    
+    <input id="volume-input" type="range" min="0" max="1"  />
+    <script>
+      document.getElementById("volume-input").addEventListener("change", (e) => {
+        window.VOLUME = e.target.value;
+      });
+    </script>
   </body>
 </html>
