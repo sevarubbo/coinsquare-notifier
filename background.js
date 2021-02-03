@@ -4,7 +4,7 @@ chrome.storage.sync.get(['volume'], (result) => {
   audio.volume = result.volume !== undefined ? result.volume : 0.5;
 });
 
-const play = src => {audio.src = "./sound1.wav"; audio.play();}
+const play = src => {audio.src = src; audio.play();}
 
 const playSounds = {
   orderChange: () => play("./sound1.wav"),
