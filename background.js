@@ -1,5 +1,8 @@
 const audio = new Audio();
-audio.volume = 0.5;
+
+chrome.storage.sync.get(['volume'], (result) => {
+  audio.volume = result.volume !== undefined ? result.volume : 0.5;
+});
 
 const play = src => {audio.src = "./sound1.wav"; audio.play();}
 
@@ -82,6 +85,8 @@ chrome.runtime.onMessage.addListener((message, callback) => {
   }
   
   if (message.type == "volume-change") {
-    audio.volume = message.data.volume;
+    chrome.storage.sync.set({volume: message.data.volume}, () => {
+      audio.volume = message.data.volume;
+    });
   }
 });
