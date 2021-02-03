@@ -53,7 +53,7 @@ chrome.runtime.onMessage.addListener((message, callback) => {
     const didMoveUp = position < lastOrderPositions[orderType];
     lastOrderPositions[orderType] = position;
     
-    if (position > 5) {
+    if (!position || position > 5) {
       return;
     }
     
